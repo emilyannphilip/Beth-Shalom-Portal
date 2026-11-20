@@ -2107,18 +2107,7 @@ input:where([type='file']):focus {
 body:has(.portal-auth-main) {
   min-height: 100vh;
   min-height: 100dvh;
-  position: relative;
-  isolation: isolate;
   background-color: #31473b;
-}
-
-body:has(.portal-auth-main)::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 4.75rem 0 0;
-  background: linear-gradient(105deg, rgb(20 39 29 / 14%), rgb(20 39 29 / 42%)),
-    url("assets/church-background.jpg") 34% top / cover no-repeat;
 }
 
 .portal-auth-header,
@@ -2129,11 +2118,26 @@ body:has(.portal-auth-main)::before {
 
 .portal-auth-header {
   gap: 0.625rem 1.25rem;
-  padding-inline: clamp(1rem, 4vw, 4rem);
+  padding: 0.5rem clamp(1rem, 4vw, 4rem);
 }
 
-.portal-auth-header > div:first-child > .bg-primary {
+.portal-auth-brand {
+  position: relative;
+  width: 7.25rem;
+  aspect-ratio: 1.22;
   flex-shrink: 0;
+  overflow: hidden;
+  mix-blend-mode: multiply;
+}
+
+.portal-auth-brand img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 118%;
+  max-width: none;
+  height: auto;
+  transform: translate(-50%, -45%);
 }
 
 .portal-auth-header :is(a, button) {
@@ -2152,6 +2156,8 @@ body:has(.portal-auth-main)::before {
 .portal-view > .portal-auth-main {
   justify-content: flex-end;
   padding: clamp(1.5rem, 4vh, 4rem) clamp(2rem, 8vw, 9rem);
+  background: linear-gradient(105deg, rgb(20 39 29 / 14%), rgb(20 39 29 / 42%)),
+    url("assets/church-background.jpg") 34% top / cover no-repeat;
 }
 
 .portal-auth-card {
@@ -2208,40 +2214,16 @@ body:has(.portal-auth-main)::before {
 }
 
 @media (max-width: 900px) {
-  body:has(.portal-auth-main)::before {
-    background-position: center, 24% top;
-  }
-
   .portal-view > .portal-auth-main {
     justify-content: center;
     padding: clamp(7rem, 22svh, 12rem) 1.25rem 2rem;
+    background-position: center, 24% top;
   }
 }
 
 @media (max-width: 540px) {
-  body:has(.portal-auth-main)::before {
-    inset-block-start: 4.875rem;
-  }
-
-  .portal-auth-header {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    padding-block: 0.75rem;
-  }
-
-  .portal-auth-header > div:first-child {
-    min-width: 0;
-    gap: 0.5rem;
-  }
-
-  .portal-auth-header > div:first-child > .bg-primary {
-    width: 2.25rem;
-    height: 2.25rem;
-  }
-
-  .portal-auth-header .font-headline {
-    font-size: 1rem;
-    white-space: nowrap;
+  .portal-auth-brand {
+    width: 6rem;
   }
 
   .portal-auth-header :is(a, button) {
@@ -2276,15 +2258,9 @@ body:has(.portal-auth-main)::before {
 
 
   <!-- Top Banner / Return Link -->
-  <header class="portal-auth-header w-full border-b py-4 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-sm">
-        <span class="material-symbols-outlined text-[24px]">spa</span>
-      </div>
-      <div>
-        <span class="font-headline text-headline-sm text-primary tracking-tight block leading-tight">Beth Shalom</span>
-        <span class="text-body-sm text-on-surface-variant block">Retirement Home &amp; Supported Living</span>
-      </div>
+  <header class="portal-auth-header w-full border-b flex items-center justify-between">
+    <div class="portal-auth-brand">
+      <img src="assets/beth-shalom-logo.jpg" width="1254" height="1254" alt="Beth Shalom GMI Retirement Home">
     </div>
     <a href="file:///J:/emily/Asha%20Kiran/Design/Beth%20Shalom/index.html" class="inline-flex items-center gap-1.5 text-body-sm font-label text-primary hover:text-tertiary transition-colors">
       <span class="material-symbols-outlined text-[18px]">arrow_back</span>
@@ -4475,15 +4451,9 @@ body:has(.portal-auth-main)::before {
 
 
   <!-- Top Header Navigation (Consistent Portal Shell Branding) -->
-  <header class="portal-auth-header w-full border-b py-4 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-sm">
-        <span class="material-symbols-outlined text-[24px]">spa</span>
-      </div>
-      <div>
-        <span class="font-headline text-headline-sm text-primary tracking-tight block leading-tight">Beth Shalom</span>
-        <span class="text-body-sm text-on-surface-variant block">Retirement Home &amp; Supported Living</span>
-      </div>
+  <header class="portal-auth-header w-full border-b flex items-center justify-between">
+    <div class="portal-auth-brand">
+      <img src="assets/beth-shalom-logo.jpg" width="1254" height="1254" alt="Beth Shalom GMI Retirement Home">
     </div>
     <div class="flex items-center gap-2">
       <button type="button" onclick="portal.call('cancelAndReturn', this)" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant bg-white text-on-surface hover:bg-surface-variant font-label text-label-sm transition-colors focus-visible:ring-2 focus-visible:ring-primary">

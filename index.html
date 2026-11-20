@@ -2090,7 +2090,7 @@ input:where([type='file']):focus {
   #app-sidebar { width: 3.5rem; min-height: 100dvh; }
   #app-sidebar[data-expanded="true"] { width: min(16rem, 72vw); position: fixed; inset: 0 auto 0 0; box-shadow: 0 0 0 100vmax #1e27234d; overflow-y: auto; }
   #app-sidebar:not([data-expanded="true"]) .sidebar-label { display: none; }
-  #app-sidebar:not([data-expanded="true"]) > div:first-child > div:first-child > div:first-child { display: none; }
+  #app-sidebar:not([data-expanded="true"]) .portal-sidebar-header > div { display: none; }
   #app-sidebar:not([data-expanded="true"]) [aria-label="Toggle sidebar width"] { margin-inline: auto; }
   .portal-view main { padding-inline: 0.75rem; }
   .portal-view .overflow-x-auto { max-width: 100%; }
@@ -2121,16 +2121,25 @@ body:has(.portal-auth-main) {
   padding: 0.5rem clamp(1rem, 4vw, 4rem);
 }
 
-.portal-auth-brand {
+.portal-auth-brand,
+.portal-sidebar-brand {
   position: relative;
-  width: 7.25rem;
   aspect-ratio: 1.22;
   flex-shrink: 0;
   overflow: hidden;
   mix-blend-mode: multiply;
 }
 
-.portal-auth-brand img {
+.portal-auth-brand {
+  width: 7.25rem;
+}
+
+.portal-sidebar-brand {
+  width: 6rem;
+}
+
+.portal-auth-brand img,
+.portal-sidebar-brand img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -2138,6 +2147,21 @@ body:has(.portal-auth-main) {
   max-width: none;
   height: auto;
   transform: translate(-50%, -45%);
+}
+
+.portal-sidebar-header {
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  #app-sidebar.w-20 .portal-sidebar-header {
+    flex-direction: column;
+    padding: 0.75rem 0.25rem;
+  }
+
+  #app-sidebar.w-20 .portal-sidebar-brand {
+    width: 2.75rem;
+  }
 }
 
 .portal-auth-header :is(a, button) {
@@ -2418,15 +2442,12 @@ body:has(.portal-auth-main) {
   <aside id="app-sidebar" class="w-64 bg-white border-r border-outline-variant flex flex-col justify-between transition-all duration-200 min-h-[1024px] sticky top-0 shrink-0 z-30" data-stitch-vh="min-h-[1024px]===min-h-screen">
     <div>
       <!-- Brand Header -->
-      <div class="p-5 border-b border-outline-variant flex items-center justify-between">
-        <div class="flex items-center gap-3 overflow-hidden">
-          <div class="w-9 h-9 rounded-xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-sm">
-            <span class="material-symbols-outlined text-[22px]">spa</span>
+      <div class="portal-sidebar-header p-5 border-b border-outline-variant flex items-center justify-between">
+        <div>
+          <div class="portal-sidebar-brand">
+            <img src="assets/beth-shalom-logo.jpg" width="1254" height="1254" alt="Beth Shalom GMI Retirement Home">
           </div>
-          <div class="sidebar-label">
-            <span class="font-headline text-headline-sm text-primary tracking-tight block leading-none">Beth Shalom</span>
-            <span class="text-label-sm font-label text-on-surface-variant block mt-1">Admin Portal</span>
-          </div>
+          <span class="sidebar-label text-label-sm font-label text-on-surface-variant block text-center mt-1">Admin Portal</span>
         </div>
         <button type="button" id="sidebar-toggle-btn" onclick="portal.call('toggleSidebar', this)" aria-label="Toggle sidebar width" class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-variant transition-colors focus-visible:ring-2 focus-visible:ring-primary">
           <span class="material-symbols-outlined text-[20px]">menu_open</span>
@@ -3025,15 +3046,12 @@ body:has(.portal-auth-main) {
   <aside id="app-sidebar" class="w-64 bg-white border-r border-outline-variant flex flex-col justify-between transition-all duration-200 min-h-[1024px] sticky top-0 shrink-0 z-30" data-stitch-vh="min-h-[1024px]===min-h-screen">
     <div>
       <!-- Brand Header -->
-      <div class="p-5 border-b border-outline-variant flex items-center justify-between">
-        <div class="flex items-center gap-3 overflow-hidden">
-          <div class="w-9 h-9 rounded-xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-sm">
-            <span class="material-symbols-outlined text-[22px]">spa</span>
+      <div class="portal-sidebar-header p-5 border-b border-outline-variant flex items-center justify-between">
+        <div>
+          <div class="portal-sidebar-brand">
+            <img src="assets/beth-shalom-logo.jpg" width="1254" height="1254" alt="Beth Shalom GMI Retirement Home">
           </div>
-          <div class="sidebar-label">
-            <span class="font-headline text-headline-sm text-primary tracking-tight block leading-none">Beth Shalom</span>
-            <span class="text-label-sm font-label text-on-surface-variant block mt-1">Admin Portal</span>
-          </div>
+          <span class="sidebar-label text-label-sm font-label text-on-surface-variant block text-center mt-1">Admin Portal</span>
         </div>
         <button type="button" onclick="portal.call('toggleSidebar', this)" aria-label="Toggle sidebar width" class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-variant transition-colors focus-visible:ring-2 focus-visible:ring-primary">
           <span class="material-symbols-outlined text-[20px]">menu_open</span>
@@ -3511,15 +3529,12 @@ body:has(.portal-auth-main) {
   <aside id="app-sidebar" class="w-64 bg-white border-r border-outline-variant flex flex-col justify-between transition-all duration-200 min-h-[1024px] sticky top-0 shrink-0 z-30" data-stitch-vh="min-h-[1024px]===min-h-screen">
     <div>
       <!-- Brand Header -->
-      <div class="p-5 border-b border-outline-variant flex items-center justify-between">
-        <div class="flex items-center gap-3 overflow-hidden">
-          <div class="w-9 h-9 rounded-xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-sm">
-            <span class="material-symbols-outlined text-[22px]">spa</span>
+      <div class="portal-sidebar-header p-5 border-b border-outline-variant flex items-center justify-between">
+        <div>
+          <div class="portal-sidebar-brand">
+            <img src="assets/beth-shalom-logo.jpg" width="1254" height="1254" alt="Beth Shalom GMI Retirement Home">
           </div>
-          <div class="sidebar-label">
-            <span class="font-headline text-headline-sm text-primary tracking-tight block leading-none">Beth Shalom</span>
-            <span class="text-label-sm font-label text-on-surface-variant block mt-1">Admin Portal</span>
-          </div>
+          <span class="sidebar-label text-label-sm font-label text-on-surface-variant block text-center mt-1">Admin Portal</span>
         </div>
         <button type="button" onclick="portal.call('toggleSidebar', this)" aria-label="Toggle sidebar width" class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-variant transition-colors focus-visible:ring-2 focus-visible:ring-primary">
           <span class="material-symbols-outlined text-[20px]">menu_open</span>
@@ -3992,15 +4007,12 @@ body:has(.portal-auth-main) {
   <aside id="app-sidebar" class="w-64 bg-white border-r border-outline-variant flex flex-col justify-between transition-all duration-200 min-h-[1024px] sticky top-0 shrink-0 z-30" data-stitch-vh="min-h-[1024px]===min-h-screen">
     <div>
       <!-- Brand Header -->
-      <div class="p-5 border-b border-outline-variant flex items-center justify-between">
-        <div class="flex items-center gap-3 overflow-hidden">
-          <div class="w-9 h-9 rounded-xl bg-secondary text-on-secondary flex items-center justify-center shrink-0 shadow-sm">
-            <span class="material-symbols-outlined text-[22px]">spa</span>
+      <div class="portal-sidebar-header p-5 border-b border-outline-variant flex items-center justify-between">
+        <div>
+          <div class="portal-sidebar-brand">
+            <img src="assets/beth-shalom-logo.jpg" width="1254" height="1254" alt="Beth Shalom GMI Retirement Home">
           </div>
-          <div class="sidebar-label">
-            <span class="font-headline text-headline-sm text-secondary tracking-tight block leading-none">Beth Shalom</span>
-            <span class="text-label-sm font-label text-on-surface-variant block mt-1">Staff Care Portal</span>
-          </div>
+          <span class="sidebar-label text-label-sm font-label text-on-surface-variant block text-center mt-1">Staff Care Portal</span>
         </div>
         <button type="button" onclick="portal.call('toggleSidebar', this)" aria-label="Toggle sidebar width" class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-variant transition-colors focus-visible:ring-2 focus-visible:ring-secondary">
           <span class="material-symbols-outlined text-[20px]">menu_open</span>

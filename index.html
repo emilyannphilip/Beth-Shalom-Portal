@@ -2104,6 +2104,171 @@ input:where([type='file']):focus {
   .portal-view main input, .portal-view main select { max-width: 100%; }
 }
 
+body:has(.portal-auth-main) {
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  isolation: isolate;
+  background-color: #31473b;
+}
+
+body:has(.portal-auth-main)::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 4.75rem 0 0;
+  background: linear-gradient(105deg, rgb(20 39 29 / 14%), rgb(20 39 29 / 42%)),
+    url("assets/church-background.jpg") 34% top / cover no-repeat;
+}
+
+.portal-auth-header,
+.portal-auth-footer {
+  background-color: #f1f6f0;
+  border-color: #c8d7cc;
+}
+
+.portal-auth-header {
+  gap: 0.625rem 1.25rem;
+  padding-inline: clamp(1rem, 4vw, 4rem);
+}
+
+.portal-auth-header > div:first-child > .bg-primary {
+  flex-shrink: 0;
+}
+
+.portal-auth-header :is(a, button) {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid #b5c9bb;
+  border-radius: 0.75rem;
+  background-color: #f8fbf7;
+  color: #2d5a4c;
+}
+
+.portal-auth-header :is(a, button):hover {
+  background-color: #e4ece7;
+}
+
+.portal-view > .portal-auth-main {
+  justify-content: flex-end;
+  padding: clamp(1.5rem, 4vh, 4rem) clamp(2rem, 8vw, 9rem);
+}
+
+.portal-auth-card {
+  padding: clamp(1.25rem, 3.5vw, 2.375rem);
+  border: 1px solid rgb(255 255 255 / 76%);
+  border-radius: 1.5rem;
+  background-color: rgb(247 251 246 / 94%);
+  box-shadow: 0 20px 56px rgb(15 32 24 / 24%), 0 2px 10px rgb(15 32 24 / 12%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.portal-auth-card .portal-auth-panel {
+  gap: 0.5rem;
+  background-color: #e8f0e9;
+  border-color: #c6d7cc;
+}
+
+.portal-auth-card .portal-auth-panel > div {
+  gap: 0.375rem 0.75rem;
+}
+
+.portal-auth-actions {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.portal-auth-actions > button {
+  width: 100%;
+  min-height: 2.75rem;
+}
+
+@media (min-width: 640px) {
+  .portal-auth-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.portal-auth-card :is(input[type="text"], input[type="password"]) {
+  min-height: 2.875rem;
+  border-color: #768e80;
+  background-color: #fdfefc;
+  font-size: 1rem;
+}
+
+.portal-auth-header :focus-visible,
+.portal-auth-card :focus-visible {
+  outline: 2px solid #2d5a4c;
+  outline-offset: 3px;
+}
+
+.portal-auth-footer {
+  padding-inline: 1rem;
+}
+
+@media (max-width: 900px) {
+  body:has(.portal-auth-main)::before {
+    background-position: center, 24% top;
+  }
+
+  .portal-view > .portal-auth-main {
+    justify-content: center;
+    padding: clamp(7rem, 22svh, 12rem) 1.25rem 2rem;
+  }
+}
+
+@media (max-width: 540px) {
+  body:has(.portal-auth-main)::before {
+    inset-block-start: 4.875rem;
+  }
+
+  .portal-auth-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding-block: 0.75rem;
+  }
+
+  .portal-auth-header > div:first-child {
+    min-width: 0;
+    gap: 0.5rem;
+  }
+
+  .portal-auth-header > div:first-child > .bg-primary {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .portal-auth-header .font-headline {
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+
+  .portal-auth-header :is(a, button) {
+    max-width: 7rem;
+    padding-inline: 0.625rem;
+    line-height: 1.25;
+    text-align: left;
+  }
+
+  .portal-auth-header :is(a, button) .material-symbols-outlined {
+    flex-shrink: 0;
+  }
+
+  .portal-view > .portal-auth-main {
+    padding: clamp(5.5rem, 13svh, 8rem) 1rem 1.5rem;
+  }
+
+  .portal-auth-intro {
+    margin-bottom: 1.25rem;
+  }
+
+  .portal-auth-note {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2111,7 +2276,7 @@ input:where([type='file']):focus {
 
 
   <!-- Top Banner / Return Link -->
-  <header class="w-full border-b border-outline-variant/60 bg-white/80 backdrop-blur-sm py-4 px-6 md:px-12 flex items-center justify-between">
+  <header class="portal-auth-header w-full border-b py-4 flex items-center justify-between">
     <div class="flex items-center gap-3">
       <div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-sm">
         <span class="material-symbols-outlined text-[24px]">spa</span>
@@ -2128,15 +2293,11 @@ input:where([type='file']):focus {
   </header>
 
   <!-- Main Login Card Container -->
-  <main class="flex-1 flex items-center justify-center p-6 md:p-12 relative overflow-hidden">
-    <!-- Subtle Botanical Decorative Ambience (CSS Shapes) -->
-    <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary-container/40 blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-secondary-container/40 blur-3xl pointer-events-none"></div>
-
-    <div class="w-full max-w-md bg-white border border-outline-variant/80 rounded-2xl shadow-sm p-8 md:p-10 relative z-10">
+  <main class="portal-auth-main flex-1 flex items-center">
+    <div class="portal-auth-card w-full max-w-md">
       
       <!-- Header / RBAC Notice -->
-      <div class="text-center mb-8">
+      <div class="portal-auth-intro text-center mb-8">
         <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-surface-variant text-primary mb-3">
           <span class="material-symbols-outlined text-[26px]">admin_panel_settings</span>
         </div>
@@ -2147,7 +2308,7 @@ input:where([type='file']):focus {
       </div>
 
       <!-- Quick Role Switcher / Demo Hint -->
-      <div class="mb-6 p-3 bg-surface-variant/70 border border-outline-variant rounded-xl flex items-center justify-between text-body-sm">
+      <div class="portal-auth-panel mb-6 p-3 border rounded-xl flex items-center justify-between text-body-sm">
         <span class="text-label-sm font-label text-on-surface-variant">Demo Quick-Fill:</span>
         <div class="flex items-center gap-2">
           <button type="button" id="fill-admin-btn" class="px-2.5 py-1 text-label-sm font-semibold rounded bg-white text-primary border border-outline-variant hover:bg-primary hover:text-white transition-colors">
@@ -2221,7 +2382,7 @@ input:where([type='file']):focus {
       </form>
 
       <!-- RBAC Notice Footer -->
-      <div class="mt-8 pt-6 border-t border-outline-variant/60 text-center">
+      <div class="portal-auth-note mt-8 pt-6 border-t border-outline-variant/60 text-center">
         <p class="text-body-sm text-outline">
           Authorised healthcare &amp; management personnel only.<br>All sessions, IP addresses, and records are audited.
         </p>
@@ -2270,7 +2431,7 @@ input:where([type='file']):focus {
   </dialog>
 
   <!-- Global Footer -->
-  <footer class="py-4 text-center text-body-sm text-outline border-t border-outline-variant/60 bg-white/50">
+  <footer class="portal-auth-footer py-4 text-center text-body-sm text-outline border-t">
     Beth Shalom Retirement Home • Secure Portal Module • Botanical Pastel Theme
   </footer>
 </template>
@@ -4314,7 +4475,7 @@ input:where([type='file']):focus {
 
 
   <!-- Top Header Navigation (Consistent Portal Shell Branding) -->
-  <header class="w-full border-b border-outline-variant/60 bg-white/80 backdrop-blur-sm py-4 px-6 md:px-12 flex items-center justify-between">
+  <header class="portal-auth-header w-full border-b py-4 flex items-center justify-between">
     <div class="flex items-center gap-3">
       <div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center shadow-sm">
         <span class="material-symbols-outlined text-[24px]">spa</span>
@@ -4333,12 +4494,8 @@ input:where([type='file']):focus {
   </header>
 
   <!-- Main Logout Confirmation View -->
-  <main class="flex-1 flex items-center justify-center p-6 md:p-12 relative overflow-hidden">
-    <!-- Subtle Botanical Pastel Ambience Shapes -->
-    <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary-container/30 blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-secondary-container/30 blur-3xl pointer-events-none"></div>
-
-    <div class="w-full max-w-lg bg-white border border-outline-variant/80 rounded-2xl shadow-sm p-8 md:p-10 relative z-10 text-center">
+  <main class="portal-auth-main flex-1 flex items-center">
+    <div class="portal-auth-card w-full max-w-lg text-center">
       
       <!-- Prominent Logout Icon Accent -->
       <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-error-container text-error mb-4 shadow-sm">
@@ -4352,7 +4509,7 @@ input:where([type='file']):focus {
       </p>
 
       <!-- Active User & Session Metadata Box -->
-      <div class="my-6 p-4 rounded-xl bg-surface-variant/50 border border-outline-variant/60 text-left text-body-sm space-y-2.5">
+      <div class="portal-auth-panel my-6 p-4 rounded-xl border text-left text-body-sm space-y-2.5">
         <div class="flex items-center justify-between">
           <span class="text-label-sm text-outline">Active Account:</span>
           <span id="user-display-name" class="font-semibold text-on-surface font-label">Administrator Session</span>
@@ -4371,14 +4528,14 @@ input:where([type='file']):focus {
       </div>
 
       <!-- Action Confirmation Buttons -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+      <div class="portal-auth-actions pt-2">
         <!-- Cancel Action (Returns to Dashboard) -->
-        <button type="button" onclick="portal.call('cancelAndReturn', this)" class="w-full sm:w-1/2 py-2.5 px-4 rounded-lg border border-outline-variant bg-white text-on-surface hover:bg-surface-variant font-label text-label-lg transition-colors focus-visible:ring-2 focus-visible:ring-primary shadow-sm">
+        <button type="button" onclick="portal.call('cancelAndReturn', this)" class="py-2.5 px-4 rounded-lg border border-outline-variant bg-white text-on-surface hover:bg-surface-variant font-label text-label-lg transition-colors focus-visible:ring-2 focus-visible:ring-primary shadow-sm">
           Cancel &amp; Stay
         </button>
 
         <!-- Confirm Logout Action -->
-        <button type="button" id="confirm-logout-btn" onclick="portal.call('executeLogout', this)" class="w-full sm:w-1/2 py-2.5 px-4 rounded-lg bg-error text-on-error hover:opacity-90 font-label text-label-lg transition-all focus-visible:ring-2 focus-visible:ring-error shadow-sm flex items-center justify-center gap-2">
+        <button type="button" id="confirm-logout-btn" onclick="portal.call('executeLogout', this)" class="py-2.5 px-4 rounded-lg bg-error text-on-error hover:opacity-90 font-label text-label-lg transition-all focus-visible:ring-2 focus-visible:ring-error shadow-sm flex items-center justify-center gap-2">
           <span class="material-symbols-outlined text-[20px]">power_settings_new</span>
           <span>Sign Out Now</span>
         </button>
@@ -4393,7 +4550,7 @@ input:where([type='file']):focus {
   </main>
 
   <!-- Global Footer -->
-  <footer class="py-4 text-center text-body-sm text-on-surface-variant border-t border-outline-variant/60 bg-white/50">
+  <footer class="portal-auth-footer py-4 text-center text-body-sm text-on-surface-variant border-t">
     Beth Shalom Retirement Home • Secure Portal Session Manager
   </footer>
 </template>
